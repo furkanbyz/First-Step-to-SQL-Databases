@@ -1,0 +1,19 @@
+import mysql.connector
+
+def insertproducts() :
+    connection=mysql.connector.connect(host="localhost",user="root",password="mysql1234",database="node-app")
+    cursor=connection.cursor()
+    sql="INSERT INTO Products(name,price,imageurl,description) VALUES(%s,%s,%s,%s)"
+    values=("Apple12",10000,"1.jpeg","en iyisi")
+    cursor.execute(sql,values)
+    
+    try:
+        connection.commit()
+    except mysql.connector.Error as err:
+         print("hata",err)
+    finally:
+        connection.close()
+        print("database kapatıldı")
+
+
+insertproducts()
